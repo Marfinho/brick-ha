@@ -11,7 +11,7 @@
           "calendar": "Calendar URL or token (optional)"
         },
         "data_description": {
-          "url": "e.g. https://brick.example (with https://, no trailing slash)",
+          "url": "Full address starting with https:// (no trailing slash)",
           "token": "Starts with lht_",
           "calendar": "Full ICS URL or just the calendar token"
         }
@@ -155,7 +155,7 @@
       "message": "Provide either speaker and TTS service, or a notify service."
     },
     "invalid_notify_service": {
-      "message": "The notify service must look like notify.<name>."
+      "message": "The notify service must start with \"notify.\"."
     }
   }
 }

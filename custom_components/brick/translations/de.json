@@ -11,7 +11,7 @@
           "calendar": "Kalender-URL oder -Token (optional)"
         },
         "data_description": {
-          "url": "z. B. https://brick.example (mit https://, ohne abschließenden Slash)",
+          "url": "Vollständige Adresse mit https:// (ohne abschließenden Slash)",
           "token": "Beginnt mit lht_",
           "calendar": "Vollständige ICS-URL oder nur das Kalender-Token"
         }
@@ -155,7 +155,7 @@
       "message": "Gib entweder Lautsprecher und TTS-Dienst oder einen Notify-Dienst an."
     },
     "invalid_notify_service": {
-      "message": "Der Notify-Dienst muss die Form notify.<name> haben."
+      "message": "Der Notify-Dienst muss mit „notify.“ beginnen."
     }
   }
 }
