@@ -1,0 +1,161 @@
+{
+  "config": {
+    "flow_title": "Brick",
+    "step": {
+      "user": {
+        "title": "Brick verbinden",
+        "description": "Trage die Adresse deiner Brick-Instanz und ein Sprachassistent-Token (Scope „voice“) ein. Tokens erzeugst du in Brick unter Profil → Gekoppelte Geräte. Das Kalender-Token (Scope „calendar“) oder die Kalender-URL ist optional.",
+        "data": {
+          "url": "Brick-URL",
+          "token": "Sprachassistent-Token",
+          "calendar": "Kalender-URL oder -Token (optional)"
+        },
+        "data_description": {
+          "url": "z. B. https://brick.example (mit https://, ohne abschließenden Slash)",
+          "token": "Beginnt mit lht_",
+          "calendar": "Vollständige ICS-URL oder nur das Kalender-Token"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Brick: Token erneuern",
+        "description": "Brick ({url}) hat das Token abgelehnt. Erzeuge in Brick ein neues Sprachassistent-Token und trage es hier ein.",
+        "data": {
+          "token": "Sprachassistent-Token"
+        }
+      },
+      "reconfigure": {
+        "title": "Brick neu konfigurieren",
+        "data": {
+          "url": "Brick-URL",
+          "calendar": "Kalender-URL oder -Token (optional)"
+        }
+      }
+    },
+    "error": {
+      "invalid_url": "Die URL muss mit http:// oder https:// beginnen.",
+      "insecure_http": "Achtung: http:// außerhalb deines lokalen Netzes überträgt das Token unverschlüsselt. Verwende https://, oder sende erneut ab, um trotzdem fortzufahren.",
+      "invalid_auth": "Das Token wurde abgelehnt. Ist es ein Sprachassistent-Token (Scope „voice“) und nicht widerrufen?",
+      "cannot_connect": "Brick ist nicht erreichbar.",
+      "rate_limited": "Zu viele Abfragen. Bitte in einer Minute erneut versuchen.",
+      "invalid_calendar": "Ungültige Kalender-URL oder ungültiges Token.",
+      "unknown": "Unerwarteter Fehler."
+    },
+    "abort": {
+      "already_configured": "Diese Brick-Instanz ist bereits eingerichtet.",
+      "reauth_successful": "Das Token wurde aktualisiert.",
+      "reconfigure_successful": "Die Konfiguration wurde aktualisiert."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Brick-Optionen",
+        "data": {
+          "scan_interval": "Abfrageintervall (Minuten)"
+        },
+        "data_description": {
+          "scan_interval": "Minimum 5 Minuten. Jeder Zyklus nutzt drei Abfragen."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "training_today": {
+        "name": "Training heute"
+      },
+      "training_tomorrow": {
+        "name": "Training morgen"
+      },
+      "training_week": {
+        "name": "Training Woche"
+      }
+    },
+    "binary_sensor": {
+      "training_open": {
+        "name": "Training offen"
+      }
+    },
+    "calendar": {
+      "training": {
+        "name": "Training"
+      }
+    }
+  },
+  "selector": {
+    "day": {
+      "options": {
+        "today": "Heute",
+        "tomorrow": "Morgen",
+        "week": "Woche"
+      }
+    },
+    "detail": {
+      "options": {
+        "short": "Kurz",
+        "normal": "Normal (mit Form und Wettkampf-Countdown)"
+      }
+    }
+  },
+  "services": {
+    "announce": {
+      "name": "Training ansagen",
+      "description": "Ruft das aktuelle Training von Brick ab und spricht es über einen Lautsprecher.",
+      "fields": {
+        "day": {
+          "name": "Tag",
+          "description": "Heute, morgen oder die Woche."
+        },
+        "detail": {
+          "name": "Detailgrad",
+          "description": "„Normal“ nennt zusätzlich Form und Wettkampf-Countdown."
+        },
+        "media_player": {
+          "name": "Lautsprecher",
+          "description": "Media Player, auf dem angesagt wird."
+        },
+        "tts_entity": {
+          "name": "TTS-Dienst",
+          "description": "TTS-Entität für die Sprachausgabe (nicht nötig bei Alexa Media Player)."
+        },
+        "volume": {
+          "name": "Lautstärke",
+          "description": "Lautstärke während der Ansage (0 bis 1)."
+        },
+        "restore_volume": {
+          "name": "Lautstärke zurücksetzen",
+          "description": "Stellt die vorherige Lautstärke nach der Ansage wieder her."
+        },
+        "notify_service": {
+          "name": "Notify-Dienst (Alexa)",
+          "description": "Alexa Media Player: z. B. notify.alexa_media_echo_kueche. Statt TTS-Dienst."
+        },
+        "config_entry": {
+          "name": "Brick-Eintrag",
+          "description": "Nur nötig, wenn mehrere Brick-Instanzen eingerichtet sind."
+        }
+      }
+    },
+    "refresh": {
+      "name": "Jetzt aktualisieren",
+      "description": "Ruft Brick sofort ab (höchstens alle 30 Sekunden).",
+      "fields": {
+        "config_entry": {
+          "name": "Brick-Eintrag",
+          "description": "Nur nötig, wenn mehrere Brick-Instanzen eingerichtet sind."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_loaded_entry": {
+      "message": "Brick ist nicht eingerichtet oder nicht geladen."
+    },
+    "announce_target_missing": {
+      "message": "Gib entweder Lautsprecher und TTS-Dienst oder einen Notify-Dienst an."
+    },
+    "invalid_notify_service": {
+      "message": "Der Notify-Dienst muss die Form notify.<name> haben."
+    }
+  }
+}

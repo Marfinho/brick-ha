@@ -1,0 +1,62 @@
+announce:
+  fields:
+    day:
+      required: false
+      default: today
+      selector:
+        select:
+          translation_key: day
+          options:
+            - today
+            - tomorrow
+            - week
+    detail:
+      required: false
+      default: normal
+      selector:
+        select:
+          translation_key: detail
+          options:
+            - short
+            - normal
+    media_player:
+      required: false
+      selector:
+        entity:
+          domain: media_player
+          multiple: true
+    tts_entity:
+      required: false
+      selector:
+        entity:
+          domain: tts
+    volume:
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 1
+          step: 0.05
+          mode: slider
+    restore_volume:
+      required: false
+      default: true
+      selector:
+        boolean:
+    notify_service:
+      required: false
+      example: notify.alexa_media_echo_kueche
+      selector:
+        text:
+    config_entry:
+      required: false
+      selector:
+        config_entry:
+          integration: brick
+refresh:
+  fields:
+    config_entry:
+      required: false
+      selector:
+        config_entry:
+          integration: brick
