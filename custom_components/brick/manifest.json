@@ -1,0 +1,13 @@
+{
+  "domain": "brick",
+  "name": "Brick",
+  "codeowners": ["@Marfinho"],
+  "config_flow": true,
+  "dependencies": ["http", "frontend"],
+  "documentation": "https://github.com/Marfinho/brick-ha",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Marfinho/brick-ha/issues",
+  "requirements": ["icalendar>=6.0.0"],
+  "version": "0.1.0"
+}

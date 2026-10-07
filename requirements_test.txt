@@ -1,0 +1,4 @@
+pytest-homeassistant-custom-component
+icalendar>=6.0.0
+ruff
+mypy
