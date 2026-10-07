@@ -1,0 +1,161 @@
+{
+  "config": {
+    "flow_title": "Brick",
+    "step": {
+      "user": {
+        "title": "Connect Brick",
+        "description": "Enter the address of your Brick instance and a voice token (scope \"voice\"). Create tokens in Brick under Profile → Paired devices. The calendar token (scope \"calendar\") or calendar URL is optional.",
+        "data": {
+          "url": "Brick URL",
+          "token": "Voice assistant token",
+          "calendar": "Calendar URL or token (optional)"
+        },
+        "data_description": {
+          "url": "Full address starting with https:// (no trailing slash)",
+          "token": "Starts with lht_",
+          "calendar": "Full ICS URL or just the calendar token"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Brick: renew token",
+        "description": "Brick ({url}) rejected the token. Create a new voice token in Brick and enter it here.",
+        "data": {
+          "token": "Voice assistant token"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Brick",
+        "data": {
+          "url": "Brick URL",
+          "calendar": "Calendar URL or token (optional)"
+        }
+      }
+    },
+    "error": {
+      "invalid_url": "The URL must start with http:// or https://.",
+      "insecure_http": "Warning: http:// outside your local network sends the token unencrypted. Use https://, or submit again to continue anyway.",
+      "invalid_auth": "The token was rejected. Is it a voice token (scope \"voice\") and not revoked?",
+      "cannot_connect": "Cannot reach Brick.",
+      "rate_limited": "Too many requests. Please try again in a minute.",
+      "invalid_calendar": "Invalid calendar URL or token.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This Brick instance is already configured.",
+      "reauth_successful": "The token was updated.",
+      "reconfigure_successful": "The configuration was updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Brick options",
+        "data": {
+          "scan_interval": "Polling interval (minutes)"
+        },
+        "data_description": {
+          "scan_interval": "Minimum 5 minutes. Each cycle uses three requests."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "training_today": {
+        "name": "Training today"
+      },
+      "training_tomorrow": {
+        "name": "Training tomorrow"
+      },
+      "training_week": {
+        "name": "Training week"
+      }
+    },
+    "binary_sensor": {
+      "training_open": {
+        "name": "Training open"
+      }
+    },
+    "calendar": {
+      "training": {
+        "name": "Training"
+      }
+    }
+  },
+  "selector": {
+    "day": {
+      "options": {
+        "today": "Today",
+        "tomorrow": "Tomorrow",
+        "week": "Week"
+      }
+    },
+    "detail": {
+      "options": {
+        "short": "Short",
+        "normal": "Normal (with form and race countdown)"
+      }
+    }
+  },
+  "services": {
+    "announce": {
+      "name": "Announce training",
+      "description": "Fetches the current training from Brick and speaks it on a speaker.",
+      "fields": {
+        "day": {
+          "name": "Day",
+          "description": "Today, tomorrow or the week."
+        },
+        "detail": {
+          "name": "Detail",
+          "description": "\"Normal\" also mentions form and race countdown."
+        },
+        "media_player": {
+          "name": "Speaker",
+          "description": "Media player to announce on."
+        },
+        "tts_entity": {
+          "name": "TTS service",
+          "description": "TTS entity used for speech (not needed for Alexa Media Player)."
+        },
+        "volume": {
+          "name": "Volume",
+          "description": "Volume during the announcement (0 to 1)."
+        },
+        "restore_volume": {
+          "name": "Restore volume",
+          "description": "Restores the previous volume afterwards."
+        },
+        "notify_service": {
+          "name": "Notify service (Alexa)",
+          "description": "Alexa Media Player, e.g. notify.alexa_media_echo_kueche. Used instead of the TTS service."
+        },
+        "config_entry": {
+          "name": "Brick entry",
+          "description": "Only needed with several Brick instances."
+        }
+      }
+    },
+    "refresh": {
+      "name": "Refresh now",
+      "description": "Fetches Brick immediately (at most every 30 seconds).",
+      "fields": {
+        "config_entry": {
+          "name": "Brick entry",
+          "description": "Only needed with several Brick instances."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "no_loaded_entry": {
+      "message": "Brick is not set up or not loaded."
+    },
+    "announce_target_missing": {
+      "message": "Provide either speaker and TTS service, or a notify service."
+    },
+    "invalid_notify_service": {
+      "message": "The notify service must start with \"notify.\"."
+    }
+  }
+}
