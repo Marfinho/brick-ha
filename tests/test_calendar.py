@@ -4,14 +4,6 @@ from __future__ import annotations
 
 from datetime import date, datetime, timedelta
 
-from custom_components.brick.const import (
-    CONF_CALENDAR_TOKEN,
-    CONF_CALENDAR_URL,
-    CONF_TOKEN,
-    CONF_URL,
-    DOMAIN,
-)
-from custom_components.brick.ics import parse_ics
 from freezegun.api import FrozenDateTimeFactory
 from homeassistant.core import HomeAssistant
 from homeassistant.util import dt as dt_util
@@ -23,6 +15,15 @@ from pytest_homeassistant_custom_component.test_util.aiohttp import (
     AiohttpClientMocker,
 )
 
+from custom_components.brick.const import (
+    CONF_CALENDAR_TOKEN,
+    CONF_CALENDAR_URL,
+    CONF_TOKEN,
+    CONF_URL,
+    DOMAIN,
+)
+from custom_components.brick.ics import parse_ics
+
 from .conftest import BASE, CALENDAR_TOKEN, FIXTURES, TOKEN
 
 ICS_URL = f"{BASE}/api/calendar/v1/training.ics"
@@ -30,7 +31,7 @@ ICS = (FIXTURES / "sample.ics").read_bytes()
 
 
 def test_parse_ics_all_day_umlauts_folding_escapes() -> None:
-    """Ganztägig, Umlaute, gefaltete Zeilen sowie \\, und \;."""
+    """Ganztägig, Umlaute, gefaltete Zeilen sowie ``\\,`` und ``\\;``."""
     events = parse_ics(ICS)
     assert [e.summary[:12] for e in events] == [
         "Radfahren 1:",

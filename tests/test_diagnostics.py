@@ -4,6 +4,13 @@ from __future__ import annotations
 
 import json
 
+from homeassistant.components.frontend import DATA_EXTRA_MODULE_URL
+from homeassistant.core import HomeAssistant
+from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant_custom_component.test_util.aiohttp import (
+    AiohttpClientMocker,
+)
+
 from custom_components.brick.const import (
     CONF_CALENDAR_TOKEN,
     CONF_CALENDAR_URL,
@@ -12,11 +19,6 @@ from custom_components.brick.const import (
     DOMAIN,
 )
 from custom_components.brick.diagnostics import async_get_config_entry_diagnostics
-from homeassistant.core import HomeAssistant
-from pytest_homeassistant_custom_component.common import MockConfigEntry
-from pytest_homeassistant_custom_component.test_util.aiohttp import (
-    AiohttpClientMocker,
-)
 
 from .conftest import BASE, CALENDAR_TOKEN, TOKEN
 
@@ -53,9 +55,6 @@ async def test_card_is_served_and_registered(
     hass: HomeAssistant, entry: MockConfigEntry, mock_summary: AiohttpClientMocker
 ) -> None:
     """Die Karte wird als statischer Pfad ausgeliefert und im Frontend geladen."""
-    from homeassistant.components.frontend import _frontend_root  # noqa: F401
-    from homeassistant.components.frontend import DATA_EXTRA_MODULE_URL
-
     entry.add_to_hass(hass)
     await hass.config_entries.async_setup(entry.entry_id)
     await hass.async_block_till_done()

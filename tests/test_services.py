@@ -8,7 +8,6 @@ from datetime import timedelta
 from unittest.mock import patch
 
 import pytest
-from custom_components.brick.const import ANNOUNCE_FALLBACK_TEXT, DOMAIN
 from freezegun.api import FrozenDateTimeFactory
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ServiceValidationError
@@ -19,6 +18,8 @@ from pytest_homeassistant_custom_component.common import (
 from pytest_homeassistant_custom_component.test_util.aiohttp import (
     AiohttpClientMocker,
 )
+
+from custom_components.brick.const import ANNOUNCE_FALLBACK_TEXT, DOMAIN
 
 from .conftest import SUMMARY, TODAY
 
@@ -85,7 +86,7 @@ async def test_announce_waits_for_playback_end(
     _player(hass)
     volume = async_mock_service(hass, "media_player", "volume_set")
 
-    async def speak(call):  # noqa: ANN001, ANN202
+    async def speak(call):
         hass.states.async_set(PLAYER, "playing", {"volume_level": 0.7})
 
     hass.services.async_register("tts", "speak", speak)
@@ -179,7 +180,7 @@ async def test_announce_restores_volume_when_tts_fails(
     _player(hass)
     volume = async_mock_service(hass, "media_player", "volume_set")
 
-    async def speak(call):  # noqa: ANN001, ANN202
+    async def speak(call):
         raise ServiceValidationError("tts kaputt")
 
     hass.services.async_register("tts", "speak", speak)

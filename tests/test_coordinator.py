@@ -5,7 +5,6 @@ from __future__ import annotations
 from datetime import timedelta
 
 import pytest
-from custom_components.brick.const import CONF_SCAN_INTERVAL, MIN_SCAN_INTERVAL
 from freezegun.api import FrozenDateTimeFactory
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.core import HomeAssistant
@@ -17,6 +16,8 @@ from pytest_homeassistant_custom_component.common import (
 from pytest_homeassistant_custom_component.test_util.aiohttp import (
     AiohttpClientMocker,
 )
+
+from custom_components.brick.const import CONF_SCAN_INTERVAL, MIN_SCAN_INTERVAL
 
 from .conftest import SUMMARY, TODAY, TOKEN, TOMORROW, WEEK
 

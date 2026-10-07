@@ -5,6 +5,14 @@ from __future__ import annotations
 from unittest.mock import patch
 
 import aiohttp
+from homeassistant import config_entries
+from homeassistant.core import HomeAssistant
+from homeassistant.data_entry_flow import FlowResultType
+from pytest_homeassistant_custom_component.common import MockConfigEntry
+from pytest_homeassistant_custom_component.test_util.aiohttp import (
+    AiohttpClientMocker,
+)
+
 from custom_components.brick.config_flow import parse_calendar_source
 from custom_components.brick.const import (
     CONF_CALENDAR,
@@ -14,13 +22,6 @@ from custom_components.brick.const import (
     CONF_TOKEN,
     CONF_URL,
     DOMAIN,
-)
-from homeassistant import config_entries
-from homeassistant.core import HomeAssistant
-from homeassistant.data_entry_flow import FlowResultType
-from pytest_homeassistant_custom_component.common import MockConfigEntry
-from pytest_homeassistant_custom_component.test_util.aiohttp import (
-    AiohttpClientMocker,
 )
 
 from .conftest import BASE, CALENDAR_TOKEN, SUMMARY, TOKEN, TOMORROW
