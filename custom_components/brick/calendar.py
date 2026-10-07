@@ -43,7 +43,10 @@ async def async_setup_entry(
     if not url and not token:
         return
     feed_url = url or calendar_url_for(entry.data[CONF_URL])
-    async_add_entities([BrickCalendar(entry, feed_url, token if not url else None)])
+    async_add_entities(
+        [BrickCalendar(entry, feed_url, token if not url else None)],
+        update_before_add=True,
+    )
 
 
 class BrickCalendar(CalendarEntity):
